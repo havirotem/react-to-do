@@ -52,6 +52,10 @@ function App() {
     {
       text: "Build really cool todo app",
       isCompleted: false
+    },
+    {
+      text: "Go to Yoga Class",
+      isCompleted: false
     }
   ]);
 
