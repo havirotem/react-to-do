@@ -12,5 +12,16 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
+      - name: docker login
+        env:
+          DOCKER_USER: process.env.DOCKER_USER
+          DOCKER_PASSWORD: process.env.DOCKER_PASSWORD
+        run: |
+          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
       - run: npm ci
       - run: npm test
+      - run: npm run build
+      - name: docker push
+        run: |
+          docker build . --file Dockerfile
+          docker push
